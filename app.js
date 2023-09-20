@@ -1,25 +1,23 @@
 require("dotenv").config();
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
 
-var indexRouter = require('./routes/index');
-var travelsRouter = require('./routes/travels');
+require("./models/connection");
+
+var travelsRouter = require("./routes/travels");
 //var usersRouter = require('./routes/users');
 
 var app = express();
-const cors = require('cors');
-app.use(cors())
-app.use(logger('dev'));
+const cors = require("cors");
+app.use(cors());
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
-
-app.use('/travels', travelsRouter);
-
+app.use("/travels", travelsRouter);
 
 module.exports = app;
